@@ -1,0 +1,179 @@
+::selection {background: #d25736;}
+::-moz-selection {background: #d25736;}
+
+
+a:hover, a:focus {color:#d25736;}
+
+.overlay {background-color: rgba(210,87,54,0.43);}
+
+.color_text {color:#d25736;}
+
+.color_bg {background-color:#d25736;}
+
+
+/* __________ Buttons __________ */
+.stylereset:hover {background-color:#d25736 !important;}
+
+.btn:focus, .btn:hover {background-color:#d25736;}
+.btn-dark:hover, .btn-white:hover {background: #d25736;}
+.btn-active {background-color:#d25736;}
+.btn-active:hover {background-color:#333; color:#fff;}
+
+/* _________ //Buttons _________ */
+
+
+
+
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	INDEX PAGE
+/*-----------------------------------------------------------------------------------*/
+.menu_block {background-color:#d25736;}
+.sub-menu ul {background-color:#d25736;}
+
+
+.logo a {background-position:0 -332px;}
+
+@media (max-width: 767px) {
+	.menu_block {background-color:#fff;}
+	.navbar-toggle span {color:#d25736;}
+	.sub-menu ul {background-color:transparent;}
+	.navbar-nav li a:hover, .navbar-nav li a:focus, .navbar-nav li.active a {color:#d25736;}
+	.logo {background-color:#d25736;}
+}
+
+
+.socials li a.soc1:hover {background-position: 0 -120px;}
+.socials li a.soc2:hover {background-position: -36px -120px;}
+.socials li a.soc3:hover {background-position: -71px -120px;}
+.socials li a.soc4:hover {background-position: -107px -120px;}
+.socials li a.soc5:hover {background-position: -143px -120px;}
+.socials li a.soc6:hover {background-position: -178px -120px;}
+
+
+/* __________ FlexSlider __________ */
+.flex-control-paging li a.flex-active, .flex-control-paging li a:hover {background-color:#d25736;}
+.flex-direction-nav li a:hover {background-color:#d25736;}
+
+.slide2 .flex_caption1 span.left_ribbon:before {border-top-color:#d25736;}
+.slide2 .flex_caption1 span.left_ribbon:after {border-bottom-color:#d25736;}
+.slide2 .flex_caption1 span.right_ribbon:before {border-top-color:#d25736;}
+.slide2 .flex_caption1 span.right_ribbon:after {border-bottom-color:#d25736;}
+
+
+/* _________ //FlexSlider _________ */
+
+
+/* __________ Services __________ */
+.service_item:hover {background-position:0 -1180px;}
+@media (min-width: 992px) and (max-width: 1199px) {
+	.service_item:hover {background-position:0 -1025px;}
+}
+/* _________ //Services _________ */
+
+
+/* __________ Latest Work __________ */
+.projects_block .project_item .project_descr  a.project_title {color:#d25736;}
+/* _________ //Latest Work _________ */
+
+
+/* __________ Latest News __________ */
+.latest_news_item .recent_post {background-color:#d25736;}
+.latest_news_item:hover .recent_post:before {background-color:rgba(210,87,54,0.31);}
+.recent_post_inf a:hover {color:#d25736;}
+
+footer .latest_news_item .recent_post {background-color:#d25736;}
+footer .recent_post_inf li {color:#d25736;}
+footer .latest_news_item:hover .recent_post:before {background-color:rgba(210,87,54,0.78);}
+/* _________ //Latest News _________ */
+
+/*-----------------------------------------------------------------------------------*/
+/*	//INDEX PAGE
+/*-----------------------------------------------------------------------------------*/
+
+
+
+
+
+
+/* __________ Blog __________ */
+#sidebar .tags a:hover, .tags a:hover {background: #d25736;}
+
+.FlickrImages li a {background-color:#d25736;}
+
+footer .tweet_module .tweet_time a {color:#d25736;}
+
+.tweet_module.index_page {background-color:#d25736;}
+/* _________ //Blog _________ */
+
+
+/* __________ About __________ */
+/* __________ Skills __________ */
+.skill-bar:hover {border-left-color:#d25736;}
+.skill-bar:hover span {color:#d25736;}
+/* _________ //About _________ */
+
+
+/* __________ Portfolio __________ */
+#filter li a.selected {background-color:#d25736;}
+.portfolio_block .project .hover_img {background-color:#d25736;}
+.portfolio_block .project:hover .project_descr {border-bottom-color:#d25736;}
+.portfolio_block .project:hover .project_descr h4 a {color:#d25736;}
+/* _________ //Portfolio _________ */
+
+
+/* __________ Shop __________ */
+.product_sort #filter li a:hover, .product_sort #filter li a.selected {color:#d25736;}
+
+#price-range .ui-widget-header {background: #d25736;}
+
+.product_item2:hover {border-color:#d25736;}
+
+.product_inf .btn:hover {background-color:#d25736; border-color:#d25736;}
+
+.variable-sizes .product_item .item_btn_in a.btn:hover {background-color:#d25736;}
+
+.sale {background-color:#d25736;}
+
+.type2 .product_price {color:#d25736;}
+.quantity_block .product_inf .btn.add_cart {border-color:#d25736; color:#d25736;}
+.quantity_block .product_inf .btn.add_cart:hover {border-color:#d25736; background-color:#d25736;}
+/* _________ //Shop _________ */
+
+
+/* __________ Shortcodes __________ */
+#accordion .ui-accordion-header:hover, #accordion .ui-accordion-header.ui-accordion-header-active, .shortcode_toggles_item_title:hover, .shortcode_toggles_item_title .ui-state-active {background:#d25736;}
+.nav-tabs li a:hover {color:#d25736;}
+.divider_colored {border-color:#d25736;}
+
+.most_popular .price_item_btn a, .price_item_btn a:hover {background:#d25736;}
+.most_popular .price_item_title {background:#d25736;}
+.most_popular .price_item_cost h2, .most_popular .price_item_cost h2 span {color:#d25736;}
+/* _________ //Shortcodes _________ */
+
+
+/* __________ Footer __________ */
+footer h3 {color:#d25736;}
+/* _________ //Footer _________ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

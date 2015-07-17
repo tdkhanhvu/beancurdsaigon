@@ -1,0 +1,180 @@
+::selection {background: #7a4fe7;}
+::-moz-selection {background: #7a4fe7;}
+
+
+a:hover, a:focus {color:#7a4fe7;}
+
+.overlay {background-color: rgba(122,79,231,0.43);}
+
+.color_text {color:#7a4fe7;}
+
+.color_bg {background-color:#7a4fe7;}
+
+
+/* __________ Buttons __________ */
+.stylereset:hover {background-color:#7a4fe7 !important;}
+
+.btn:focus, .btn:hover {background-color:#7a4fe7;}
+.btn-dark:hover, .btn-white:hover {background: #7a4fe7;}
+.btn-active {background-color:#7a4fe7;}
+.btn-active:hover {background-color:#333; color:#fff;}
+
+/* _________ //Buttons _________ */
+
+
+
+
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	INDEX PAGE
+/*-----------------------------------------------------------------------------------*/
+.menu_block {background-color:#7a4fe7;}
+.sub-menu ul {background-color:#7a4fe7;}
+
+
+.logo a {background-position:0 -83px;}
+
+@media (max-width: 767px) {
+	.menu_block {background-color:#fff;}
+	.navbar-toggle span {color:#7a4fe7;}
+	.sub-menu ul {background-color:transparent;}
+	.navbar-nav li a:hover, .navbar-nav li a:focus, .navbar-nav li.active a {color:#7a4fe7;}
+	.logo {background-color:#7a4fe7;}
+}
+
+
+.socials li a.soc1:hover {background-position: 0 -48px;}
+.socials li a.soc2:hover {background-position: -36px -48px;}
+.socials li a.soc3:hover {background-position: -71px -48px;}
+.socials li a.soc4:hover {background-position: -107px -48px;}
+.socials li a.soc5:hover {background-position: -143px -48px;}
+.socials li a.soc6:hover {background-position: -178px -48px;}
+
+
+/* __________ FlexSlider __________ */
+.flex-control-paging li a.flex-active, .flex-control-paging li a:hover {background-color:#7a4fe7;}
+.flex-direction-nav li a:hover {background-color:#7a4fe7;}
+
+.slide2 .flex_caption1 span.left_ribbon:before {border-top-color:#7a4fe7;}
+.slide2 .flex_caption1 span.left_ribbon:after {border-bottom-color:#7a4fe7;}
+.slide2 .flex_caption1 span.right_ribbon:before {border-top-color:#7a4fe7;}
+.slide2 .flex_caption1 span.right_ribbon:after {border-bottom-color:#7a4fe7;}
+
+
+/* _________ //FlexSlider _________ */
+
+
+/* __________ Services __________ */
+.service_item:hover {background-position:0 -472px;}
+@media (min-width: 992px) and (max-width: 1199px) {
+	.service_item:hover {background-position:0 -410px;}
+}
+
+/* _________ //Services _________ */
+
+
+/* __________ Latest Work __________ */
+.projects_block .project_item .project_descr  a.project_title {color:#7a4fe7;}
+/* _________ //Latest Work _________ */
+
+
+/* __________ Latest News __________ */
+.latest_news_item .recent_post {background-color:#7a4fe7;}
+.latest_news_item:hover .recent_post:before {background-color:rgba(122,79,231,0.31);}
+.recent_post_inf a:hover {color:#7a4fe7;}
+
+footer .latest_news_item .recent_post {background-color:#7a4fe7;}
+footer .recent_post_inf li {color:#7a4fe7;}
+footer .latest_news_item:hover .recent_post:before {background-color:rgba(122,79,231,0.78);}
+/* _________ //Latest News _________ */
+
+/*-----------------------------------------------------------------------------------*/
+/*	//INDEX PAGE
+/*-----------------------------------------------------------------------------------*/
+
+
+
+
+
+
+/* __________ Blog __________ */
+#sidebar .tags a:hover, .tags a:hover {background: #7a4fe7;}
+
+.FlickrImages li a {background-color:#7a4fe7;}
+
+footer .tweet_module .tweet_time a {color:#7a4fe7;}
+
+.tweet_module.index_page {background-color:#7a4fe7;}
+/* _________ //Blog _________ */
+
+
+/* __________ About __________ */
+/* __________ Skills __________ */
+.skill-bar:hover {border-left-color:#7a4fe7;}
+.skill-bar:hover span {color:#7a4fe7;}
+/* _________ //About _________ */
+
+
+/* __________ Portfolio __________ */
+#filter li a.selected {background-color:#7a4fe7;}
+.portfolio_block .project .hover_img {background-color:#7a4fe7;}
+.portfolio_block .project:hover .project_descr {border-bottom-color:#7a4fe7;}
+.portfolio_block .project:hover .project_descr h4 a {color:#7a4fe7;}
+/* _________ //Portfolio _________ */
+
+
+/* __________ Shop __________ */
+.product_sort #filter li a:hover, .product_sort #filter li a.selected {color:#7a4fe7;}
+
+#price-range .ui-widget-header {background: #7a4fe7;}
+
+.product_item2:hover {border-color:#7a4fe7;}
+
+.product_inf .btn:hover {background-color:#7a4fe7; border-color:#7a4fe7;}
+
+.variable-sizes .product_item .item_btn_in a.btn:hover {background-color:#7a4fe7;}
+
+.sale {background-color:#7a4fe7;}
+
+.type2 .product_price {color:#7a4fe7;}
+.quantity_block .product_inf .btn.add_cart {border-color:#7a4fe7; color:#7a4fe7;}
+.quantity_block .product_inf .btn.add_cart:hover {border-color:#7a4fe7; background-color:#7a4fe7;}
+/* _________ //Shop _________ */
+
+
+/* __________ Shortcodes __________ */
+#accordion .ui-accordion-header:hover, #accordion .ui-accordion-header.ui-accordion-header-active, .shortcode_toggles_item_title:hover, .shortcode_toggles_item_title .ui-state-active {background:#7a4fe7;}
+.nav-tabs li a:hover {color:#7a4fe7;}
+.divider_colored {border-color:#7a4fe7;}
+
+.most_popular .price_item_btn a, .price_item_btn a:hover {background:#7a4fe7;}
+.most_popular .price_item_title {background:#7a4fe7;}
+.most_popular .price_item_cost h2, .most_popular .price_item_cost h2 span {color:#7a4fe7;}
+/* _________ //Shortcodes _________ */
+
+
+/* __________ Footer __________ */
+footer h3 {color:#7a4fe7;}
+/* _________ //Footer _________ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
