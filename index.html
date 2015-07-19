@@ -177,15 +177,15 @@
 				</section><!-- //Projects -->
 				
 				<!-- Order -->
-				<section class="full_width inform_block padbot40">
-					<div class="progress">
+				<section class="full_width inform_block padbot40 bg-success">
+					<div class="progress" style="margin:0;">
 						<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;" id="progress-bar">
 							<span>0% Complete</span>
 						</div>
 					</div>
-					<form method="post" action="php/reservation.php" name="reservationform" id="reservation-form" class="form-horizontal" style="background-color: rgb(240, 255, 242); padding:20xp;">
-`                    <div id="order" class="col-md-6" style="margin-top: 20px;">
-                        <h3>Book a table</h3>
+					<form method="post" action="php/reservation.php" name="reservationform" id="reservation-form" class="form-horizontal">
+`                    <div id="order" class="col-md-6">
+                        <h3>Order</h3>
                         <div class="form-group has-success" style="margin-bottom:5px">
                             <div class="col-md-3">
                                 <img class="img-thumbnail" src="./images/original.jpg">
@@ -297,7 +297,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="detail" class="col-md-6">
+                    <div id="detail" class="col-md-6" style="margin-top:-20px;">
                         <h3>Contact Details</h3>
                         <div class="form-group has-success">
                             <div class="col-xs-8">
@@ -361,14 +361,13 @@
                         </div>
                         <div class="form-group has-success">
                             <div class="col-xs-12">
-                                <textarea name="comments"  id="comments" class="form-control" placeholder="Message" rows="6"></textarea>
+                                <textarea name="comments"  id="comments" class="form-control" placeholder="Message" rows="4"></textarea>
                             </div>
                         </div>
-                        <button id="submit-res" style="float:right;margin-left:20px;" class="btn btn-success btn-lg disabled" disabled="true">Make a reservation</button>
-                        <!-- 											<button id="switch" style="float:right" class="btn btn-success btn-lg disabled"><span id="switch-detail">Edit Detail</span><span id="switch-order" style="display:none">Edit Order</span></button> -->
+                        <button id="submit-res" style="float:right;margin-left:20px;margin-bottom:3px;" class="btn btn-success btn-lg disabled" disabled="true">Place order</button>
                     </div>
 					</form>
-					<div class="clearfix"></div>
+                    <div class="clearfix"></div>
 				</section><!-- Order -->
 				
 				<!-- Services -->
