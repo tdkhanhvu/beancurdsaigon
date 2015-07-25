@@ -1,6 +1,6 @@
 var fixed_menu = true,
-    serviceUrl = './_db/WebService.php',
-    productIds = [1, 2];
+    serviceUrl = './WebService.php',
+    productInfo = [];
 window.jQuery = window.$ = jQuery;
 
 /* Custom Scripts */
@@ -22,7 +22,50 @@ $(window).load(function() {
 /*-----------------------------------------------------------------------------------*/
 /* Contact Form */
 jQuery(document).ready(function() {
-    calculateProgressBar(getTotalAmount());
+    $('#myModal').on('hidden.bs.modal', function (e) {
+        ['name','address','email','phone','comments'].forEach(function(item) {
+            $('#'+item).val('');
+        });
+
+        productInfo.forEach(function(prdInfo) {
+            $('#selection_' + prdInfo['id']).val('0');
+        });
+        recalculate_cost();
+    })
+
+    if (productInfo.length == 0) {
+        var product_tmpl = Handlebars.compile($("#product-template").html()),
+            summary_tmpl = Handlebars.compile($("#product-summary-template").html()),
+            order_header = $('#order_header'),
+            order_summary = $('#order_summary');
+        $.ajax({
+            url: serviceUrl,
+            type: "post",
+            data: {'request':'GetProducts'},
+            dataType: 'json',
+            success: function(result){
+                if (result != '') {
+                    attrs = ['id','image','name','price'];
+                    result.forEach(function(obj) {
+                        var item = {}
+                        attrs.forEach(function(attr) {
+                            item[attr] = obj[attr];
+                        });
+                        productInfo.push(item);
+                        order_header.after(product_tmpl(item));
+                        order_summary.after(summary_tmpl(item));
+                    });
+                    $('.selection').on('change', function() {
+                        recalculate_cost();
+                    });
+                }
+            },
+            error: function(xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+    }
+    calculateProgressBar(getBeancurdCost());
 	$("#ajax-contact-form").submit(function() {
 		var str = $(this).serialize();		
 		$.ajax({
@@ -50,27 +93,44 @@ jQuery(document).ready(function() {
 	function convertNumber(num) {
 		return parseInt(num.replace(',',''));
 	}
-	$('#selection_1,#selection_2').on('change', function() {
-		var total_amount = getTotalAmount();
-		$('#beancurd_cost').html(formatNumber(total_amount));
-		var delivery_cost = calculateProgressBar(total_amount) > 0? 20000: 0;
-
-		$('#delivery_cost').html(formatNumber(delivery_cost));
-		$('#total_cost').html(formatNumber(total_amount + delivery_cost - convertNumber($('#discount').html())));
-	});
 
     $('#name,#email,#address,#phone').on('change', function() {
-        calculateProgressBar(getTotalAmount());
+        var obj =$(this),
+            id = obj.attr('id');
+        if (id != 'email')
+            $('#' + id + '_summary').html(obj.val());
+        calculateProgressBar(getBeancurdCost());
     });
 
-    function getTotalAmount() {
+    function getBeancurdCost() {
         var total_amount = 0;
-        productIds.forEach(function(productId) {
-            var item = $('#selection_' + productId);
-            total_amount += item.val() * parseInt(item.attr('cost'));
+        productInfo.forEach(function(prdInfo) {
+            var id = prdInfo['id'],
+                item = $('#selection_' + id),
+                summary_item = $('#selection_' + id+ '_summary'),
+                qty = item.val() || 0;
+
+            total_amount += qty * parseInt(item.attr('cost'));
+            summary_item.find('.quantity').html(qty);
+
+            if (qty > 0)
+                summary_item.show();
+            else
+                summary_item.hide();
         });
 
         return total_amount;
+    }
+
+    function recalculate_cost() {
+        var beancurd_cost = getBeancurdCost(),
+            delivery_cost = beancurd_cost > 0? 20000: 0,
+            total_cost = beancurd_cost + delivery_cost - convertNumber($('#discount').html());
+        calculateProgressBar(beancurd_cost);
+        $('#beancurd_cost').html(formatNumber(beancurd_cost));
+        $('#delivery_cost').html(formatNumber(delivery_cost));
+        $('#total_cost').html(formatNumber(total_cost));
+        $('#cost_summary').html(formatNumber(total_cost));
     }
 
     function checkFormFill() {
@@ -114,15 +174,12 @@ function submitOrder() {
         phone = $('#phone').val(),
         message = $('#comments').val(),
         today = new Date(),
-        //order_date = today.getFullYear() + '-' + (today.getMonth()+1) + '-'+ today.getDate()
-        //                + ' ' + $('#restime').val(),
-        order_date = today.toISOString().substring(0, 10) + ' ' + $('#restime').val(),
-        //order_date= $('#restime').val();
+        date_schedule = today.toISOString().substring(0, 10) + ' ' + $('#restime').val(),
         products = [];
-    alert(name + ' ' + address + ' ' + email + ' ' + phone + ' ' + message + ' ' + order_date);
+    //alert(name + ' ' + address + ' ' + email + ' ' + phone + ' ' + message + ' ' + order_date);
 
-    productIds.forEach(function(productId) {
-        products.push({'id':productId, 'quantity': $('#selection_' + productId).val()});
+    productInfo.forEach(function(prdInfo) {
+        products.push({'id':prdInfo['id'], 'quantity': $('#selection_' + prdInfo['id']).val()});
     });
     console.log(products);
     
@@ -130,12 +187,12 @@ function submitOrder() {
         url: serviceUrl,
         type: "post",
         data: {'request':'CreateOrder', 'name':name, 'address': address, 'email': email,
-                'phone': phone, 'message': message, 'order_date': order_date,
+                'phone': phone, 'message': message, 'date_schedule': date_schedule,
                 'products': JSON.stringify(products)},
         dataType: 'json',
         success: function(result){
             if (result != '0') {
-                alert(result);
+                console.log(result);
             }
         },
         error: function(xhr, status, error) {
@@ -240,7 +297,7 @@ jQuery(window).load(function(){
 		controlNav: true,
 		directionNav: false,
 		animationLoop: false,
-		slideshow: false,
+		slideshow: false
 	});
 	
 	//productIds Slide

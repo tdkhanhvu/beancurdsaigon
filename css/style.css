@@ -1967,10 +1967,10 @@ footer .tweet_module .tweet_time a {color:#acc825;}
 	-webkit-transform: translateX(0);
 }
 .quantity {
-	padding:8px 23px 8px 0;
-	text-transform:uppercase;
-	font-size:14px;
-	color:#505050;
+	/*padding:8px 23px 8px 0;*/
+	/*text-transform:uppercase;*/
+	/*font-size:14px;*/
+	/*color:#505050;*/
 }
 
 .quantity_block .product-amount form {
