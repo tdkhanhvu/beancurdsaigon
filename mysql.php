@@ -118,17 +118,38 @@ class MySQL {
     public function getOrders() {
         $orders = $this->selectFromTable('orders',null,null,'', ' id DESC');
         $result = array();
-        $result['aaData'] =  array();
-        foreach ($orders as $order) {
-            $temp = array();
-            array_push($temp, $order['id']);
-            array_push($temp,$order['contact_id']);
-            array_push($temp,$order['date_create']);
-            array_push($temp,$order['date_schedule']);
-            array_push($temp,$order['date_deliver']);
+        $rootE = 'data';
+//        //$rootE = 'aaData';
+//
+//        $result[$rootE] =  array();
+//        foreach ($orders as $order) {
+//            $temp = array();
+//            array_push($temp, $order['id']);
+//            array_push($temp,$order['contact_id']);
+//            array_push($temp,$order['date_create']);
+//            array_push($temp,$order['date_schedule']);
+//            array_push($temp,$order['date_deliver']);
+//            array_push($temp,$order['staff_id']);
+//            array_push($temp,$order['message']);
+//            array_push($result[$rootE], $temp);
+//        }
+        $temp = array();
 
-            array_push($result['aaData'], $temp);
+        foreach ($orders as $order) {
+            $contact = $this->selectFromTable('contact', array(array('id', $order['contact_id'])))[0];
+            $el = array();
+            foreach(['id','date_create','date_schedule','date_deliver',
+                        'staff_id','message', 'status'] as $attr) {
+                $el[$attr] = $order[$attr];
+            }
+            $el['contact_id'] = $contact['id'];
+            $el['contact_name'] = $contact['name'];
+            $el['contact_email'] = $contact['email'];
+            $el['contact_address'] = $contact['address'];
+            $el['contact_phone'] = $contact['phone'];
+            array_push($temp, $el);
         }
+        $result[$rootE] = $temp;
         return $result;
     }
 

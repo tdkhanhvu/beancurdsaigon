@@ -186,6 +186,7 @@ Theme Version: 	1.3.0
 		},
 
 		rowSave: function( $row ) {
+			alert('save');
 			var _self     = this,
 				$actions,
 				values    = [];
@@ -205,7 +206,7 @@ Theme Version: 	1.3.0
 					return $.trim( $this.find('input').val() );
 				}
 			});
-
+			console.log(values);
 			this.datatable.row( $row.get(0) ).data( values );
 
 			$actions = $row.find('td.actions');

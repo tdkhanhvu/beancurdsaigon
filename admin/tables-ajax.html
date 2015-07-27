@@ -35,6 +35,12 @@
 		<!-- Theme Custom CSS -->
 		<link rel="stylesheet" href="assets/stylesheets/theme-custom.css">
 
+        <style>
+            td.details-control {
+                background: url('../css/details_open.png') no-repeat center center;
+                cursor: pointer;
+            }
+        </style>
 		<!-- Head Libs -->
 		<script src="assets/vendor/modernizr/modernizr.js"></script>
 
@@ -750,14 +756,14 @@
 								<h2 class="panel-title">Ajax</h2>
 							</header>
 							<div class="panel-body">
-								<table class="table table-bordered table-striped" id="datatable-ajax" data-url="http://localhost/oregano/WebService.php">
+								<table class="table table-bordered table-striped" id="datatable-ajax">
 									<thead>
 										<tr>
-											<th width="20%">Rendering engine</th>
-											<th width="25%">Browser</th>
-											<th width="25%">Platform(s)</th>
-											<th width="15%">Engine version</th>
-											<th width="15%">CSS grade</th>
+											<th>Id</th>
+											<th>Customer name</th>
+											<th>Date schedule</th>
+											<th>Status</th>
+                                            <th></th>
 										</tr>
 									</thead>
 									<tbody>
