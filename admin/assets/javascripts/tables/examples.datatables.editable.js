@@ -5,7 +5,23 @@ Theme Version: 	1.3.0
 */
 
 (function( $ ) {
-
+    function format ( d ) {
+        // `d` is the original data object for the row
+        return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+            '<tr>'+
+            '<td>Staff Id:</td>'+
+            '<td>'+d.staff_id+'</td>'+
+            '</tr>'+
+            '<tr>'+
+            '<td>Message:</td>'+
+            '<td>'+d.message+'</td>'+
+            '</tr>'+
+            '<tr>'+
+            '<td>Extra info:</td>'+
+            '<td>And any further details here (images etc)...</td>'+
+            '</tr>'+
+            '</table>';
+    }
 	'use strict';
 
 	var EditableTable = {
@@ -42,12 +58,26 @@ Theme Version: 	1.3.0
 
 		build: function() {
 			this.datatable = this.$table.DataTable({
-				aoColumns: [
-					null,
-					null,
-					null,
-					{ "bSortable": false }
-				]
+				// aoColumns: [
+					// null,
+					// null,
+					// null,
+					// { "bSortable": false }
+				// ]
+			"ajax": "http://localhost/oregano/WebService.php",
+            "columns": [
+                { "data": "id" },
+                { "data": "contact_name" },
+                { "data": "date_schedule" },
+                { "data": "status" },
+                {
+                    "className": 'details-control center',
+                    "orderable": false,
+                    "data": null,
+                    "defaultContent": ''
+                }
+            ],
+            "order": [[1, 'asc']]
 			});
 
 			window.dt = this.datatable;
@@ -239,6 +269,23 @@ Theme Version: 	1.3.0
 
 	$(function() {
 		EditableTable.initialize();
+		
+		        // Add event listener for opening and closing details
+        $('#datatable-ajax tbody').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = table.row( tr );
+
+            if ( row.child.isShown() ) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child( format(row.data()) ).show();
+                tr.addClass('shown');
+            }
+        } );
 	});
 
 }).apply( this, [ jQuery ]);

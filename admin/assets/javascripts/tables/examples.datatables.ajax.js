@@ -9,25 +9,6 @@ Theme Version: 	1.3.0
 	'use strict';
 
 	var datatableInit = function() {
-		// var datasource = null;
-        // $.ajax({
-            // url: serviceUrl,
-            // type: "post",
-            // data: {'request':'GetOrders'},
-            // dataType: 'json',
-            // success: function(result){
-                // datasource = result;
-            // },
-            // error: function(xhr, status, error) {
-                // alert(xhr.responseText);
-            // }
-        // });
-		//var $table = $('#datatable-ajax');
-		//$table.dataTable({
-		//	bProcessing: true,
-		//	sAjaxSource: $table.data('url')
-		//});
-
         var table = $('#datatable-ajax').DataTable( {
             "ajax": "http://localhost/oregano/WebService.php",
             "columns": [

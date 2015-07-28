@@ -118,22 +118,6 @@ class MySQL {
     public function getOrders() {
         $orders = $this->selectFromTable('orders',null,null,'', ' id DESC');
         $result = array();
-        $rootE = 'data';
-//        //$rootE = 'aaData';
-//
-//        $result[$rootE] =  array();
-//        foreach ($orders as $order) {
-//            $temp = array();
-//            array_push($temp, $order['id']);
-//            array_push($temp,$order['contact_id']);
-//            array_push($temp,$order['date_create']);
-//            array_push($temp,$order['date_schedule']);
-//            array_push($temp,$order['date_deliver']);
-//            array_push($temp,$order['staff_id']);
-//            array_push($temp,$order['message']);
-//            array_push($result[$rootE], $temp);
-//        }
-        $temp = array();
 
         foreach ($orders as $order) {
             $contact = $this->selectFromTable('contact', array(array('id', $order['contact_id'])))[0];
@@ -147,9 +131,8 @@ class MySQL {
             $el['contact_email'] = $contact['email'];
             $el['contact_address'] = $contact['address'];
             $el['contact_phone'] = $contact['phone'];
-            array_push($temp, $el);
+            array_push($result, $el);
         }
-        $result[$rootE] = $temp;
         return $result;
     }
 

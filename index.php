@@ -469,14 +469,6 @@
                     <div id="order_summary" class="row">
                         <div class="col-sm-12">The order of</div>
                     </div>
-<!--                    <div class="row right">
-                        <div class="col-sm-2 col-sm-offset-2">2</div>
-                        <div class="col-sm-8">Original beancurd</div>
-                    </div>
-                    <div class="row right">
-                        <div class="col-sm-2 col-sm-offset-2">10</div>
-                        <div class="col-sm-8">Almond beancurd</div>
-                    </div>-->
                     <div class="row">
                         <div class="col-sm-12">With total cost of</div>
                     </div>
