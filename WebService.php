@@ -19,6 +19,8 @@
                 $_POST['email'], $_POST['phone'], $_POST['message'], $_POST['date_schedule'],
                 $_POST['products']);
             break;
+        case "CalculateCost":
+            $result = $mysql->calculateCost($_POST['products']);
         default:
             break;
     }

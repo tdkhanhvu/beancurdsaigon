@@ -222,7 +222,7 @@
                                 </p>
                             </div>
                             <div class="col-md-6" style="height:30px">
-                                <p id="discount" style="text-align:right">
+                                <p id="discount_cost" style="text-align:right">
                                     0
                                 </p>
                             </div>

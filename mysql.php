@@ -131,6 +131,21 @@ class MySQL {
             $el['contact_email'] = $contact['email'];
             $el['contact_address'] = $contact['address'];
             $el['contact_phone'] = $contact['phone'];
+
+            $products = array();
+            $product_list = $this->selectFromTable('order_product', array(array('order_id', $order['id'])));
+
+            foreach($product_list as $product_item) {
+                $product = array();
+                $product_info = $this->selectFromTable('product', array(array('id', $product_item['product_id'])))[0];
+
+                $product['quantity'] = $product_item['quantity'];
+                $product['price'] = $product_item['price'];
+                $product['name'] = $product_info['name'];
+
+                array_push($products, $product);
+            }
+            $el['products'] = $products;
             array_push($result, $el);
         }
         return $result;
@@ -140,6 +155,33 @@ class MySQL {
         return $this->selectFromTable('product',null,null,'', ' id DESC');
     }
 
+    public function calculateCost($products) {
+        $products = json_decode($products, true);
+        $delivery_cost = 0;
+        $discount_cost = 0;
+
+        $beancurd_cost = 0;
+        foreach ($products as $product) {
+            $product_info = $this->selectFromTable('product', array(array('id', $product['id'])))[0];
+            $beancurd_cost += $product['quantity'] * $product_info['price'];
+        }
+
+        if ($beancurd_cost > 0)
+            $delivery_cost = 20000;
+
+        if ($beancurd_cost > 150000)
+            $discount_cost = $beancurd_cost / 10;
+
+        $total_cost = $beancurd_cost + $delivery_cost - $discount_cost;
+
+        $result = array();
+        $result['beancurd_cost'] = $beancurd_cost;
+        $result['delivery_cost'] = $delivery_cost;
+        $result['discount_cost'] = $discount_cost;
+        $result['total_cost'] = $total_cost;
+
+        return $result;
+    }
 	// Insert into reply
 	public function createOrder($name, $address, $phone, $email, $phone, $message, $date_schedule,
             $products) {

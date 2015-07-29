@@ -30,7 +30,7 @@ jQuery(document).ready(function() {
         productInfo.forEach(function(prdInfo) {
             $('#selection_' + prdInfo['id']).val('0');
         });
-        recalculate_cost();
+        updateCost();
     })
 
     if (productInfo.length == 0) {
@@ -56,7 +56,7 @@ jQuery(document).ready(function() {
                         order_summary.after(summary_tmpl(item));
                     });
                     $('.selection').on('change', function() {
-                        recalculate_cost();
+                        updateCost();
                     });
                 }
             },
@@ -122,15 +122,42 @@ jQuery(document).ready(function() {
         return total_amount;
     }
 
-    function recalculate_cost() {
-        var beancurd_cost = getBeancurdCost(),
-            delivery_cost = beancurd_cost > 0? 20000: 0,
-            total_cost = beancurd_cost + delivery_cost - convertNumber($('#discount').html());
-        calculateProgressBar(beancurd_cost);
-        $('#beancurd_cost').html(formatNumber(beancurd_cost));
-        $('#delivery_cost').html(formatNumber(delivery_cost));
-        $('#total_cost').html(formatNumber(total_cost));
-        $('#cost_summary').html(formatNumber(total_cost));
+    function updateCost() {
+        getBeancurdCost();
+        var products = [],
+            beancurd_cost = 0,
+            total_cost = 0;
+
+        productInfo.forEach(function(prdInfo) {
+            var id = prdInfo['id'],
+                qty = $('#selection_' + id).val() || 0;
+
+            products.push({'id': id, 'quantity': qty});
+        });
+        console.log(products);
+        $.ajax({
+            url: serviceUrl,
+            type: "post",
+            data: {'request':'CalculateCost', 'products': JSON.stringify(products)},
+            dataType: 'json',
+            success: function(result){
+                console.log(result);
+                if (result != '') {
+                    beancurd_cost = result['beancurd_cost'];
+                    total_cost = result['total_cost'];
+
+                    calculateProgressBar(beancurd_cost);
+                    $('#beancurd_cost').html(formatNumber(beancurd_cost));
+                    $('#delivery_cost').html(formatNumber(result['delivery_cost']));
+                    $('#discount_cost').html(formatNumber(result['discount_cost']));
+                    $('#total_cost').html(formatNumber(total_cost));
+                    $('#cost_summary').html(formatNumber(total_cost));
+                }
+            },
+            error: function(xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
     }
 
     function checkFormFill() {
