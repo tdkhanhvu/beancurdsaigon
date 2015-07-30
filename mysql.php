@@ -116,27 +116,36 @@ class MySQL {
         }
     }
 
+    public function getAllStatus() {
+        return $this->selectFromTable('status',null,null,'', '');
+    }
+
+    public function getAllStaffs() {
+        return $this->selectFromTable('staff',null,null,'', '');
+    }
+
     public function getOrders() {
         $orders = $this->selectFromTable('orders',null,null,'', ' id DESC');
         $result = array();
 
         foreach ($orders as $order) {
             $el = array();
-            foreach(['id','date_create','date_schedule','date_deliver',
+            foreach(array('id','date_create','date_schedule','date_deliver',
                         'staff_id','message', 'status', 'beancurd_cost',
-                        'delivery_cost', 'discount_cost', 'total_cost'] as $attr) {
+                        'delivery_cost', 'discount_cost', 'total_cost') as $attr) {
                 $el[$attr] = $order[$attr];
             }
 
-            $contact = $this->selectFromTable('contact', array(array('id', $order['contact_id'])))[0];
-            foreach(['id','name','email','address','phone'] as $attr) {
+            $temp = $this->selectFromTable('contact', array(array('id', $order['contact_id'])));
+            $contact = $temp[0];
+            foreach(array('id','name','email','address','phone') as $attr) {
                 $el['contact_'.$attr] = $contact[$attr];
             }
 
             $staffs = $this->selectFromTable('staff', array(array('id', $order['staff_id'])));
             if (sizeof($staffs) > 0) {
                 $staff = $staffs[0];
-                foreach(['name','image','phone'] as $attr) {
+                foreach(array('name','image','phone') as $attr) {
                     $el['staff_'.$attr] = $staff[$attr];
                 }
             }
@@ -146,7 +155,8 @@ class MySQL {
 
             foreach($product_list as $product_item) {
                 $product = array();
-                $product_info = $this->selectFromTable('product', array(array('id', $product_item['product_id'])))[0];
+                $temp = $this->selectFromTable('product', array(array('id', $product_item['product_id'])));
+                $product_info = $temp[0];
 
                 $product['quantity'] = $product_item['quantity'];
                 $product['price'] = $product_item['price'];
@@ -170,7 +180,8 @@ class MySQL {
 
         $beancurd_cost = 0;
         foreach ($products as $product) {
-            $product_info = $this->selectFromTable('product', array(array('id', $product['id'])))[0];
+            $temp = $this->selectFromTable('product', array(array('id', $product['id'])));
+            $product_info = $temp[0];
             $beancurd_cost += $product['quantity'] * $product_info['price'];
         }
 
@@ -218,7 +229,8 @@ class MySQL {
 
 
         foreach ($products as $product) {
-            $product_info = $this->selectFromTable('product', array(array('id', $product['id'])))[0];
+            $temp = $this->selectFromTable('product', array(array('id', $product['id'])));
+            $product_info = $temp[0];
 
             $this->insertIntoTable('order_product',
                 array(

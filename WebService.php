@@ -11,6 +11,12 @@
         case "GetOrders":
             $result = $mysql->getOrders();
             break;
+        case "GetAllStatus":
+            $result = $mysql->getAllStatus();
+            break;
+        case "GetAllStaffs":
+            $result = $mysql->getAllStaffs();
+            break;
         case "GetProducts":
             $result = $mysql->getProducts();
             break;
