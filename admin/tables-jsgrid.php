@@ -758,24 +758,52 @@
 							</header>
 							<div class="panel-body">
                                 <div id="jsGrid"></div>
-                                <div id="myModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                    <div class="modal-dialog modal-sm" role="document">
+                                <!-- Modal -->
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title" id="myModalLabel">Order Confirmation</h4>
+                                                <h4 class="modal-title" id="myModalLabel">Order Detail</h4>
                                             </div>
                                             <div class="modal-body">
-                                                <p id="message"></p>
-                                                <p id="date_create"></p>
+                                                <form class="form-horizontal">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-4 control-label">Message</label>
+                                                        <div class="col-sm-8">
+                                                            <p id="message" class="form-control-static"></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-4 control-label">Date Create</label>
+                                                        <div class="col-sm-8">
+                                                            <p id="date_create" class="form-control-static"></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Product</th>
+                                                                <th>Price</th>
+                                                                <th>Quantity</th>
+                                                                <th>Cost</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody id="order_table">
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save changes</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 						</section>
 					<!-- end: page -->
@@ -876,6 +904,16 @@
 		<!-- Examples -->
 
         <script src="assets/javascripts/jsgrid.min.js"></script>
+        <script src="../js/handlebars-v3.0.3.js" type="text/javascript"></script>
 		<script src="assets/javascripts/tables/examples.jsgrid.ajax.js"></script>
+        <script id="product-template" type="text/x-handlebars-template">
+            <tr>
+                <th scope="row">{{order}}</th>
+                <td>{{name}}</td>
+                <td>{{price}}</td>
+                <td>{{quantity}}</td>
+                <td>{{total_cost}}</td>
+            </tr>
+        </script>
 	</body>
 </html>

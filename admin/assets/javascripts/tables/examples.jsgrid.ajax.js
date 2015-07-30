@@ -59,10 +59,23 @@ $(function() {
         deleteConfirm: "Do you really want to delete the client?",
         controller: db,
         rowClick: function(args) {
-            var selectItem = args.item;
+            var selectItem = args.item,
+                product_tmpl = Handlebars.compile($("#product-template").html()),
+                order_table = $('#order_table'),
+                count = 1;
             $("#message").html(selectItem['message']);
             $("#date_create").html(selectItem['date_create']);
-            //console.log(selectItem);
+            order_table.html('');
+            console.log(selectItem);
+
+            selectItem['products'].forEach(function(product) {
+                $.extend(product, {
+                    'order': count,
+                    'total_cost' : parseInt(product['quantity']) * parseInt(product['price'])
+                });
+                order_table.append(product_tmpl(product));
+                count += 1;
+            });
             $('#myModal').modal('show');
         },
 

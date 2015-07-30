@@ -6,6 +6,7 @@ class MySQL {
 
 	// Construction
 	public function __construct() {
+        date_default_timezone_set('Asia/Saigon');
         if ($_SERVER['SERVER_NAME'] == 'localhost') {
             $this->mysqli = mysqli_connect('localhost', 'root', '', 'beancurdsaigon');
         }
@@ -156,7 +157,6 @@ class MySQL {
     }
 
     public function calculateCost($products) {
-        $products = json_decode($products, true);
         $delivery_cost = 0;
         $discount_cost = 0;
 
@@ -185,7 +185,6 @@ class MySQL {
 	// Insert into reply
 	public function createOrder($name, $address, $phone, $email, $phone, $message, $date_schedule,
             $products) {
-        $products = json_decode($products, true);
         $contact_id = $this->insertIntoTable('contact',
             array(
                 array('name', $name),
@@ -195,22 +194,30 @@ class MySQL {
                 )
         );
 
+        $costs = $this->calculateCost($products);
         $order_id = $this->insertIntoTable('orders',
             array(
                 array('contact_id', $contact_id),
                 array('date_create', date('Y-m-d H:i:s')),
-                array('date_schedule', $date_schedule.':00'),
+                array('date_schedule', date('Y-m-d ').$date_schedule.':00'),
+                array('beancurd_cost', $costs['beancurd_cost']),
+                array('delivery_cost', $costs['delivery_cost']),
+                array('discount_cost', $costs['discount_cost']),
+                array('total_cost', $costs['total_cost']),
                 array('message', $message)
             )
         );
 
 
         foreach ($products as $product) {
+            $product_info = $this->selectFromTable('product', array(array('id', $product['id'])))[0];
+
             $this->insertIntoTable('order_product',
                 array(
                     array('order_id', $order_id),
                     array('product_id', $product['id']),
-                    array('quantity', $product['quantity'])
+                    array('quantity', $product['quantity']),
+                    array('price', $product_info['price'])
                 ));
         }
 

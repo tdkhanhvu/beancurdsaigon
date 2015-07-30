@@ -17,10 +17,10 @@
         case "CreateOrder":
             $result = $mysql->createOrder($_POST['name'],$_POST['address'],$_POST['phone'],
                 $_POST['email'], $_POST['phone'], $_POST['message'], $_POST['date_schedule'],
-                $_POST['products']);
+                json_decode($_POST['products'], true));
             break;
         case "CalculateCost":
-            $result = $mysql->calculateCost($_POST['products']);
+            $result = $mysql->calculateCost(json_decode($_POST['products'], true));
         default:
             break;
     }

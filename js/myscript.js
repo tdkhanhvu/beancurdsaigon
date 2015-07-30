@@ -201,7 +201,7 @@ function submitOrder() {
         phone = $('#phone').val(),
         message = $('#comments').val(),
         today = new Date(),
-        date_schedule = today.toISOString().substring(0, 10) + ' ' + $('#restime').val(),
+        date_schedule = ('#restime').val(),
         products = [];
     //alert(name + ' ' + address + ' ' + email + ' ' + phone + ' ' + message + ' ' + order_date);
 
