@@ -279,6 +279,10 @@ class MySQL {
         }
     }
 
+    public function updateOrder($orderId, $staffId, $status) {
+        $this->updateTable('orders', array(array('staff_id', $staffId),array('status',$status)),
+                                array(array('id', $orderId)));
+    }
 	/***************************************************
 	 ***************************************************
 	 *********************	Delete 	********************

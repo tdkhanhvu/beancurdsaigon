@@ -22,6 +22,15 @@ $(function() {
 
         updateItem: function(updatingClient) {
             console.log(updatingClient);
+            $.ajax({
+                url: serviceUrl,
+                data: {'request':'UpdateOrder', 'order_id': updatingClient['id'],
+                        'staff_id': updatingClient['staff_id'], 'status': updatingClient['status']},
+                type: "post",
+                dataType: 'json'
+            }).done(function(response) {
+                alert('success');
+            })
         },
 
         deleteItem: function(deletingClient) {
@@ -117,9 +126,9 @@ $(function() {
                 fields: [
                     { name: "id", title: "Id", type: "text", editing: false},
                     { name: "contact_name", title: "Contact Name", type: "text",editing: false},
-                    { name: "contact_phone", title: "Contact Phone", type: "text",editing: false},
                     { name: "contact_address", title: "Contact Address", type: "text",editing: false},
-                    { name: "date_schedule", type: "text", title: "Date Schedule"},
+                    { name: "date_schedule", type: "text", title: "Date Schedule",editing: false},
+                    { name: "date_deliver", type: "text", title: "Date Deliver"},
                     { name: "status", type: "select", title: "Status", items: db.statuses, valueField: "id", textField: "name",selectedIndex:0 },
                     { name: "staff_id", type: "select", title: "Staff", items: db.staffs, valueField: "id", textField: "name",selectedIndex:0 },
                     //{ name: "Married", type: "checkbox", title: "Is Married", sorting: false },

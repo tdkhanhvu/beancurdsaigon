@@ -25,6 +25,9 @@
                 $_POST['email'], $_POST['phone'], $_POST['message'], $_POST['date_schedule'],
                 json_decode($_POST['products'], true));
             break;
+        case "UpdateOrder":
+            $result = $mysql->updateOrder($_POST['order_id'], $_POST['staff_id'], $_POST['status']);
+            break;
         case "CalculateCost":
             $result = $mysql->calculateCost(json_decode($_POST['products'], true));
         default:
