@@ -121,17 +121,25 @@ class MySQL {
         $result = array();
 
         foreach ($orders as $order) {
-            $contact = $this->selectFromTable('contact', array(array('id', $order['contact_id'])))[0];
             $el = array();
             foreach(['id','date_create','date_schedule','date_deliver',
-                        'staff_id','message', 'status'] as $attr) {
+                        'staff_id','message', 'status', 'beancurd_cost',
+                        'delivery_cost', 'discount_cost', 'total_cost'] as $attr) {
                 $el[$attr] = $order[$attr];
             }
-            $el['contact_id'] = $contact['id'];
-            $el['contact_name'] = $contact['name'];
-            $el['contact_email'] = $contact['email'];
-            $el['contact_address'] = $contact['address'];
-            $el['contact_phone'] = $contact['phone'];
+
+            $contact = $this->selectFromTable('contact', array(array('id', $order['contact_id'])))[0];
+            foreach(['id','name','email','address','phone'] as $attr) {
+                $el['contact_'.$attr] = $contact[$attr];
+            }
+
+            $staffs = $this->selectFromTable('staff', array(array('id', $order['staff_id'])));
+            if (sizeof($staffs) > 0) {
+                $staff = $staffs[0];
+                foreach(['name','image','phone'] as $attr) {
+                    $el['staff_'.$attr] = $staff[$attr];
+                }
+            }
 
             $products = array();
             $product_list = $this->selectFromTable('order_product', array(array('order_id', $order['id'])));

@@ -767,36 +767,181 @@
                                                 <h4 class="modal-title" id="myModalLabel">Order Detail</h4>
                                             </div>
                                             <div class="modal-body">
-                                                <form class="form-horizontal">
-                                                    <div class="form-group">
-                                                        <label class="col-sm-4 control-label">Message</label>
-                                                        <div class="col-sm-8">
-                                                            <p id="message" class="form-control-static"></p>
+                                                <div>
+
+                                                    <!-- Nav tabs -->
+                                                    <ul class="nav nav-tabs" role="tablist">
+                                                        <li role="presentation" class="active"><a href="#summary" aria-controls="summary" role="tab" data-toggle="tab">Summary</a></li>
+                                                        <li role="presentation"><a href="#order" aria-controls="order" role="tab" data-toggle="tab">Order</a></li>
+                                                        <li role="presentation"><a href="#contact" aria-controls="contact" role="tab" data-toggle="tab">Contact</a></li>
+                                                    </ul>
+
+                                                    <!-- Tab panes -->
+                                                    <div class="tab-content">
+                                                        <div role="tabpanel" class="tab-pane active" id="summary">
+                                                            <form class="form-horizontal">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label">Date Create</label>
+                                                                    <div class="col-sm-8">
+                                                                        <p id="date_create" class="form-control-static"></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label">Date Schedule</label>
+                                                                    <div class="col-sm-8">
+                                                                        <p id="date_schedule" class="form-control-static"></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label">Date Deliver</label>
+                                                                    <div class="col-sm-8">
+                                                                        <p id="date_deliver" class="form-control-static"></p>
+                                                                    </div>
+                                                                </div>
+                                                                <hr>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label">Message</label>
+                                                                    <div class="col-sm-8">
+                                                                        <p id="message" class="form-control-static"></p>
+                                                                    </div>
+                                                                </div>
+                                                                <hr>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label">Staff Name</label>
+                                                                    <div class="col-sm-8">
+                                                                        <p id="staff_name" class="form-control-static"></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label">Staff Phone</label>
+                                                                    <div class="col-sm-8">
+                                                                        <p id="staff_phone" class="form-control-static"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <div role="tabpanel" class="tab-pane" id="order">
+                                                            <form class="form-horizontal">
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-4">
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-6 control-label">Beancurd</label>
+                                                                            <div class="col-sm-6">
+                                                                                <p id="beancurd_cost" class="form-control-static"></p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-6 control-label">Discount</label>
+                                                                            <div class="col-sm-6">
+                                                                                <p id="discount_cost" class="form-control-static"></p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-6 control-label">Delivery</label>
+                                                                            <div class="col-sm-6">
+                                                                                <p id="delivery_cost" class="form-control-static"></p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-6 control-label">Total</label>
+                                                                            <div class="col-sm-6">
+                                                                                <p id="total_cost" class="form-control-static"></p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-8">
+                                                                        <div class="form-group">
+                                                                            <table class="table table-striped">
+                                                                                <thead>
+                                                                                <tr>
+                                                                                    <th>#</th>
+                                                                                    <th>Product</th>
+                                                                                    <th>Price</th>
+                                                                                    <th>Quantity</th>
+                                                                                    <th>Cost</th>
+                                                                                </tr>
+                                                                                </thead>
+                                                                                <tbody id="order_table">
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+<!--                                                            <form class="form-horizontal">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label">Beancurd</label>
+                                                                    <div class="col-sm-2">
+                                                                        <p id="beancurd_cost" class="form-control-static"></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label">Discount</label>
+                                                                    <div class="col-sm-2">
+                                                                        <p id="discount_cost" class="form-control-static"></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label">Delivery</label>
+                                                                    <div class="col-sm-2">
+                                                                        <p id="delivery_cost" class="form-control-static"></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label">Total</label>
+                                                                    <div class="col-sm-2">
+                                                                        <p id="total_cost" class="form-control-static"></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <table class="table table-striped">
+                                                                        <thead>
+                                                                        <tr>
+                                                                            <th>#</th>
+                                                                            <th>Product</th>
+                                                                            <th>Price</th>
+                                                                            <th>Quantity</th>
+                                                                            <th>Cost</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        <tbody id="order_table">
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </form>-->
+                                                        </div>
+                                                        <div role="tabpanel" class="tab-pane" id="contact">
+                                                            <form class="form-horizontal">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label">Name</label>
+                                                                    <div class="col-sm-8">
+                                                                        <p id="name" class="form-control-static"></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label">Phone Number</label>
+                                                                    <div class="col-sm-8">
+                                                                        <p id="phone" class="form-control-static"></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label">Email</label>
+                                                                    <div class="col-sm-8">
+                                                                        <p id="email" class="form-control-static"></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label">Address</label>
+                                                                    <div class="col-sm-8">
+                                                                        <p id="address" class="form-control-static"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-4 control-label">Date Create</label>
-                                                        <div class="col-sm-8">
-                                                            <p id="date_create" class="form-control-static"></p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <table class="table table-striped">
-                                                            <thead>
-                                                            <tr>
-                                                                <th>#</th>
-                                                                <th>Product</th>
-                                                                <th>Price</th>
-                                                                <th>Quantity</th>
-                                                                <th>Cost</th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody id="order_table">
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </form>
-                                            </div>
+
+                                                </div>
+                                           </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                 <button type="button" class="btn btn-primary">Save changes</button>
