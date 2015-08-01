@@ -124,8 +124,13 @@ class MySQL {
         return $this->selectFromTable('staff',null,null,'', '');
     }
 
-    public function getOrders() {
-        $orders = $this->selectFromTable('orders',null,null,'', ' id DESC');
+    public function getOrders($staffId) {
+        $orders = null;
+        if ($staffId == null)
+            $orders = $this->selectFromTable('orders',null,null,'', ' id DESC');
+        else
+            $orders = $this->selectFromTable('orders',array(array('staff_id', $staffId)),
+                null,'', ' id DESC');
         $result = array();
 
         foreach ($orders as $order) {
@@ -282,6 +287,16 @@ class MySQL {
     public function updateOrder($orderId, $staffId, $status) {
         $this->updateTable('orders', array(array('staff_id', $staffId),array('status',$status)),
                                 array(array('id', $orderId)));
+
+        return 1;
+    }
+
+    public function updateStaff($id, $name, $image, $phone, $available) {
+        $this->updateTable('staff', array(array('name',$name),array('image', $image),
+                array('phone', $phone),array('available', $available)),
+            array(array('id', $id)));
+
+        return 1;
     }
 	/***************************************************
 	 ***************************************************

@@ -2,40 +2,65 @@ var serviceUrl = '../WebService.php';
 
 $(function() {
     var db = {
-        loadData: function() {
-            var d = $.Deferred(),
-                temp = this;
+        loadData: function(filter) {
+            if (this.orders == null){
+                var d = $.Deferred(),
+                    temp = this;
+                $.ajax({
+                    url: serviceUrl,
+                    data: {'request':'GetOrders'},
+                    dataType: 'json'
+                }).done(function(response) {
+                    temp.orders = response;
+                    d.resolve(response);
+                });
+
+                return d.promise();
+            }
+            else {
+                console.log('filter');
+                return $.grep(this.orders, function(order) {
+                    console.log('filter');
+                    console.log(filter);
+                    console.log('order');
+                    console.log(order);
+                    return (!filter.id || order.id.indexOf(filter.id) > -1)
+                        && (!filter['contact_name'] || order['contact_name'].indexOf(filter['contact_name']) > -1)
+                        && (!filter['contact_address'] || order['contact_address'].indexOf(filter['contact_address']) > -1)
+                        && (!filter['date_schedule'] || order['date_schedule'] === filter['date_schedule'])
+                        && (!filter['date_deliver'] || order['date_deliver'] === filter['date_deliver'])
+                        && (filter.status == '0' || order.status === filter.status)
+                        && (filter['staff_id'] == '0' || order['staff_id'] === filter['staff_id'])
+                });
+            }
+        },
+        insertItem: function(insertingOrder) {
+            this.orders.push(insertingOrder);
+        },
+
+        updateItem: function(updatingOrder) {
+            console.log(updatingOrder);
             $.ajax({
                 url: serviceUrl,
-                data: {'request':'GetOrders'},
-                dataType: 'json'
-            }).done(function(response) {
-                temp.clients = response;
-                d.resolve(response);
-            });
-
-            return d.promise();
-        },
-        insertItem: function(insertingClient) {
-            this.clients.push(insertingClient);
-        },
-
-        updateItem: function(updatingClient) {
-            console.log(updatingClient);
-            $.ajax({
-                url: serviceUrl,
-                data: {'request':'UpdateOrder', 'order_id': updatingClient['id'],
-                        'staff_id': updatingClient['staff_id'], 'status': updatingClient['status']},
+                data: {'request':'UpdateOrder', 'order_id': updatingOrder['id'],
+                        'staff_id': updatingOrder['staff_id'], 'status': updatingOrder['status']},
                 type: "post",
                 dataType: 'json'
             }).done(function(response) {
                 alert('success');
+                db.staffs.forEach(function(staff) {
+                    if (staff['id'] == updatingOrder['staff_id']) {
+                        updatingOrder['staff_phone'] = staff['phone'];
+                        updatingOrder['staff_name'] = staff['name'];
+                        updatingOrder['staff_image'] = staff['image'];
+                    }
+                });
             })
         },
 
-        deleteItem: function(deletingClient) {
-            var clientIndex = $.inArray(deletingClient, this.clients);
-            this.clients.splice(clientIndex, 1);
+        deleteItem: function(deletingOrder) {
+            var orderIndex = $.inArray(deletingOrder, this.orders);
+            this.orders.splice(orderIndex, 1);
         }
 
     };
@@ -73,14 +98,14 @@ $(function() {
                 width: "800px",
 
                 sorting: true,
-
+                filtering: true,
                 autoload: true,
                 editing: true,
                 paging: true,
                 pageSize: 15,
                 pageButtonCount: 5,
 
-                deleteConfirm: "Do you really want to delete the client?",
+                deleteConfirm: "Do you really want to delete the order?",
                 controller: db,
                 rowClick: function(args) {
                     var selectItem = args.item,
@@ -131,7 +156,6 @@ $(function() {
                     { name: "date_deliver", type: "text", title: "Date Deliver"},
                     { name: "status", type: "select", title: "Status", items: db.statuses, valueField: "id", textField: "name",selectedIndex:0 },
                     { name: "staff_id", type: "select", title: "Staff", items: db.staffs, valueField: "id", textField: "name",selectedIndex:0 },
-                    //{ name: "Married", type: "checkbox", title: "Is Married", sorting: false },
                     { type: "control" }
                 ]
             });
