@@ -9,7 +9,7 @@
 
     switch($request) {
         case "GetOrders":
-            $result = $mysql->getOrders(null);
+            $result = $mysql->getOrders();
             break;
         case "GetAllStatus":
             $result = $mysql->getAllStatus();
@@ -20,12 +20,9 @@
         case "GetProducts":
             $result = $mysql->getProducts();
             break;
-        case "GetOrderByStaff":
-            $result = $mysql->getOrders($_POST['id']);
-            break;
         case "CreateOrder":
             $result = $mysql->createOrder($_POST['name'],$_POST['address'],$_POST['phone'],
-                $_POST['email'], $_POST['phone'], $_POST['message'], $_POST['date_schedule'],
+                $_POST['email'], $_POST['message'], $_POST['date_schedule'],
                 json_decode($_POST['products'], true));
             break;
         case "UpdateOrder":

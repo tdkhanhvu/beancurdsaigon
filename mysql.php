@@ -1,8 +1,11 @@
 <?php
+require_once('./email/mail.php');
+require_once('./email/sendMail.php');
 
 class MySQL {
 	// Private PDO object
     private $mysqli;
+    private $email;
 
 	// Construction
 	public function __construct() {
@@ -31,6 +34,8 @@ class MySQL {
             die('Connect Error (' . mysqli_connect_errno() . ') '
                 . mysqli_connect_error());
         }
+
+        $this->email = new SendMail;
 	}
 
 	/***************************************************
@@ -124,13 +129,8 @@ class MySQL {
         return $this->selectFromTable('staff',null,null,'', '');
     }
 
-    public function getOrders($staffId) {
-        $orders = null;
-        if ($staffId == null)
-            $orders = $this->selectFromTable('orders',null,null,'', ' id DESC');
-        else
-            $orders = $this->selectFromTable('orders',array(array('staff_id', $staffId)),
-                null,'', ' id DESC');
+    public function getOrders() {
+        $orders = $this->selectFromTable('orders',null,null,'', ' id DESC');
         $result = array();
 
         foreach ($orders as $order) {
@@ -207,7 +207,7 @@ class MySQL {
         return $result;
     }
 	// Insert into reply
-	public function createOrder($name, $address, $phone, $email, $phone, $message, $date_schedule,
+	public function createOrder($name, $address, $phone, $email, $message, $date_schedule,
             $products) {
         $contact_id = $this->insertIntoTable('contact',
             array(
@@ -232,7 +232,7 @@ class MySQL {
             )
         );
 
-
+        $orders = array();
         foreach ($products as $product) {
             $temp = $this->selectFromTable('product', array(array('id', $product['id'])));
             $product_info = $temp[0];
@@ -244,8 +244,18 @@ class MySQL {
                     array('quantity', $product['quantity']),
                     array('price', $product_info['price'])
                 ));
+            $order = array();
+            $order['image'] =  $product_info['image'];
+            $order['price'] = $product_info['price'];
+            $order['name'] = $product_info['name'];
+            $order['quantity'] = $product['quantity'];
+            $order['total'] = $product_info['price'] * $product['quantity'];
+
+            array_push($orders, $order);
         }
 
+        $this->email->sendOrderPlaceMail($name, $email, $phone, $address, $date_schedule,
+            $costs['delivery_cost'], $costs['discount_cost'], $costs['total_cost'], $orders);
 		return 1;
     }
 
