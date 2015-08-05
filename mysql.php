@@ -254,7 +254,7 @@ class MySQL {
             array_push($orders, $order);
         }
 
-        $this->email->sendOrderPlaceMail($name, $email, $phone, $address, $date_schedule,
+        $this->email->sendOrderPlacedMail($name, $email, $phone, $address, $date_schedule,
             $costs['delivery_cost'], $costs['discount_cost'], $costs['total_cost'], $orders);
 		return 1;
     }
@@ -294,10 +294,45 @@ class MySQL {
         }
     }
 
-    public function updateOrder($orderId, $staffId, $status) {
+    public function updateOrder($orderId, $staffId, $status, $date_deliver) {
         $this->updateTable('orders', array(array('staff_id', $staffId),array('status',$status)),
-                                array(array('id', $orderId)));
+                          array(array('id', $orderId)), array(array('date_deliver', $date_deliver)));
 
+        $temp = $this->selectFromTable('orders', array(array('id', $orderId)));
+        $order = $temp[0];
+
+        $temp = $this->selectFromTable('contact', array(array('id', $order['contact_id'])));
+        $contact = $temp[0];
+
+        $temp = $this->selectFromTable('staff', array(array('id', $order['staff_id'])));
+        $staff = $temp[0];
+
+        $order_products = $this->selectFromTable('order_product', array(array('order_id',
+                            $order['id'])));
+
+        $orders = array();
+
+        foreach($order_products as $order_product){
+            $temp = $this->selectFromTable('product', array(array('id', $order_product['product_id'])));
+            $product_info = $temp[0];
+
+            $order_temp = array();
+            $order_temp['image'] =  $product_info['image'];
+            $order_temp['price'] = $order_product['price'];
+            $order_temp['name'] = $product_info['name'];
+            $order_temp['quantity'] = $order_product['quantity'];
+            $order_temp['total'] = $order_product['price'] * $order_product['quantity'];
+            array_push($orders, $order_temp);
+        }
+
+        if ($status == 1)
+        $this->email->sendOrderDeliveringMail($contact['name'], $contact['email'], $contact['phone'],
+            $contact['address'], $order['date_schedule'], $order['delivery_cost'],
+            $order['discount_cost'], $order['total_cost'], $orders, $staff);
+        else if ($status == 2)
+            $this->email->sendOrderDeliveredMail($order['id'], $contact['name'], $contact['email'],
+                $contact['phone'], $contact['address'], $order['date_deliver'], $order['delivery_cost'],
+                $order['discount_cost'], $order['total_cost'], $orders, $staff);
         return 1;
     }
 

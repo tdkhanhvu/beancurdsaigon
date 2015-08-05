@@ -1,22 +1,19 @@
-<html>
-   <body style="font-size:12px; font-family:Helvetica, arial, verdana; color:#000000">
-		<img alt="Beancurd Saigon logo" border="0" src="http://www.citibank.com.sg/mbol/edm/push/banking_push/images/header.jpg" title="Your monthly statement is ready for viewing.">
-		<p>
-			<span><strong>Dear {{name}},</strong></span>
-		</p>
-		<p>
-			<span>Your order is on the way:</span>
-		</p>
-        {{deliver_detail}}
-        <p>
-            Your order detail:
-        </p>
-        {{order}}
-		<p>
-			<span>Regards</span>
-		</p>
-		<p>
-			<span>Beancurd Saigon</span>
-		</p>
-   </body>
-</html>
+<hr style="-webkit-margin-after: 0;">
+<span style="background-color: #dff0d8;color: #468847;border: 1px solid #d6e9c6;font-size: 20px;">
+    Step 2: Deliver
+</span>
+<p>
+    <span>Your order is on the way:</span>
+</p>
+{{deliver_detail}}
+<p style="margin-bottom:30px;">
+    <span>Is scheduled to be delivered at <strong>{{date_schedule}}</strong></span>
+</p>
+<hr style="-webkit-margin-after: 0;">
+<span style="background-color: #dff0d8;color: #468847;border: 1px solid #d6e9c6;font-size: 20px;">
+    Step 1: Place order
+</span>
+<p>
+    Your order detail:
+</p>
+{{order}}

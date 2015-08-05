@@ -26,11 +26,12 @@
                 json_decode($_POST['products'], true));
             break;
         case "UpdateOrder":
-            $result = $mysql->updateOrder($_POST['order_id'], $_POST['staff_id'], $_POST['status']);
+            $result = $mysql->updateOrder($_POST['order_id'], $_POST['staff_id'], $_POST['status'],
+                $_POST['date_deliver']);
             break;
         case "UpdateStaff":
-            $result = $mysql->updateStaff($_POST['id'], $_POST['name'], $_POST['image']
-                , $_POST['phone'], $_POST['available']);
+            $result = $mysql->updateStaff($_POST['id'], $_POST['name'], $_POST['image'],
+                $_POST['phone'], $_POST['available']);
             break;
         case "CalculateCost":
             $result = $mysql->calculateCost(json_decode($_POST['products'], true));

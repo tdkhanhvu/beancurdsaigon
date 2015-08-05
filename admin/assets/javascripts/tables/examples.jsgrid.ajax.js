@@ -43,7 +43,8 @@ $(function() {
             $.ajax({
                 url: serviceUrl,
                 data: {'request':'UpdateOrder', 'order_id': updatingOrder['id'],
-                        'staff_id': updatingOrder['staff_id'], 'status': updatingOrder['status']},
+                        'staff_id': updatingOrder['staff_id'], 'status': updatingOrder['status'],
+                        'date_deliver': updatingOrder['date_deliver']},
                 type: "post",
                 dataType: 'json'
             }).done(function(response) {
